@@ -1,106 +1,107 @@
 #!/bin/bash
 
 echo "Welcome to the Linux Enumeration Tool!"
-echo "Select the task to run:"
+while true; do
+    # Menu options
+    echo "Select the task to run:"
+    echo "1) User ID"
+    echo "2) Hostname"
+    echo "3) List files with detailed permissions"
+    echo "4) List sudo permissions"
+    echo "5) Show contents of /etc/passwd"
+    echo "6) Show contents of /etc/shadow"
+    echo "7) Show contents of /etc/issue"
+    echo "8) Show contents of /etc/os-release"
+    echo "9) System Information (uname -a)"
+    echo "10) Routing Information"
+    echo "11) List cron jobs in /etc/cron* directories"
+    echo "12) List user crontab"
+    echo "13) Find writable directories"
+    echo "14) Find SUID files"
+    echo "15) Exit"
 
-# Menu options
-echo "1) User ID"
-echo "2) Hostname"
-echo "3) List files with detailed permissions"
-echo "4) List sudo permissions"
-echo "5) Show contents of /etc/passwd"
-echo "6) Show contents of /etc/shadow"
-echo "7) Show contents of /etc/issue"
-echo "8) Show contents of /etc/os-release"
-echo "9) System Information (uname -a)"
-echo "10) Routing Information"
-echo "11) List cron jobs in /etc/cron* directories"
-echo "12) List user crontab"
-echo "13) Find writable directories"
-echo "14) Find SUID files"
-echo "15) Exit"
+    # User input for task selection
+    read -p "Enter your choice (1-15): " choice
 
-# User input for task selection
-read -p "Enter your choice (1-15): " choice
-
-case $choice in
-    1)
-        # Check user ID
-        echo -e "\nUser ID:"
-        id
-        ;;
-    2)
-        # Check hostname
-        echo -e "\nHostname:"
-        hostname
-        ;;
-    3)
-        # List files with detailed permissions
-        echo -e "\nListing files with detailed permissions (ls -l):"
-        ls -l
-        ;;
-    4)
-        # List sudo permissions
-        echo -e "\nSudo permissions:"
-        sudo -l
-        ;;
-    5)
-        # Read /etc/passwd file
-        echo -e "\nContents of /etc/passwd:"
-        cat /etc/passwd
-        ;;
-    6)
-        # Read /etc/shadow file
-        echo -e "\nContents of /etc/shadow:"
-        cat /etc/shadow
-        ;;
-    7)
-        # Read /etc/issue file
-        echo -e "\nContents of /etc/issue:"
-        cat /etc/issue
-        ;;
-    8)
-        # Read /etc/os-release file
-        echo -e "\nContents of /etc/os-release:"
-        cat /etc/os-release
-        ;;
-    9)
-        # Output system information (uname -a)
-        echo -e "\nSystem Information (uname -a):"
-        uname -a
-        ;;
-    10)
-        # Check routing information (route or routel)
-        echo -e "\nRouting Information:"
-        route -n || routel -n
-        ;;
-    11)
-        # List cron jobs
-        echo -e "\nListing cron jobs in /etc/cron* directories:"
-        ls -lah /etc/cron*
-        ;;
-    12)
-        # List user crontab
-        echo -e "\nUser Crontab:"
-        crontab -l
-        ;;
-    13)
-        # Find writable directories
-        echo -e "\nFinding writable directories:"
-        find / -writable -type d 2>/dev/null
-        ;;
-    14)
-        # Find SUID files
-        echo -e "\nFinding SUID files:"
-        find / -perm -u=s -type f 2>/dev/null
-        ;;
-    15)
-        # Exit the script
-        echo -e "\nExiting script."
-        exit 0
-        ;;
-    *)
-        # Invalid input
-        echo -e "\nInvalid choice, please select a number between 1 and 15."
-        ;;
-esac
+    case $choice in
+        1)
+            # Check user ID
+            echo -e "\nUser ID:"
+            id
+            ;;
+        2)
+            # Check hostname
+            echo -e "\nHostname:"
+            hostname
+            ;;
+        3)
+            # List files with detailed permissions
+            echo -e "\nListing files with detailed permissions (ls -l):"
+            ls -l
+            ;;
+        4)
+            # List sudo permissions
+            echo -e "\nSudo permissions:"
+            sudo -l
+            ;;
+        5)
+            # Read /etc/passwd file
+            echo -e "\nContents of /etc/passwd:"
+            cat /etc/passwd
+            ;;
+        6)
+            # Read /etc/shadow file
+            echo -e "\nContents of /etc/shadow:"
+            cat /etc/shadow
+            ;;
+        7)
+            # Read /etc/issue file
+            echo -e "\nContents of /etc/issue:"
+            cat /etc/issue
+            ;;
+        8)
+            # Read /etc/os-release file
+            echo -e "\nContents of /etc/os-release:"
+            cat /etc/os-release
+            ;;
+        9)
+            # Output system information (uname -a)
+            echo -e "\nSystem Information (uname -a):"
+            uname -a
+            ;;
+        10)
+            # Check routing information (route or routel)
+            echo -e "\nRouting Information:"
+            route -n || routel -n
+            ;;
+        11)
+            # List cron jobs
+            echo -e "\nListing cron jobs in /etc/cron* directories:"
+            ls -lah /etc/cron*
+            ;;
+        12)
+            # List user crontab
+            echo -e "\nUser Crontab:"
+            crontab -l
+            ;;
+        13)
+            # Find writable directories
+            echo -e "\nFinding writable directories:"
+            find / -writable -type d 2>/dev/null
+            ;;
+        14)
+            # Find SUID files
+            echo -e "\nFinding SUID files:"
+            find / -perm -u=s -type f 2>/dev/null
+            ;;
+        15)
+            # Exit the script
+            echo -e "\nExiting script."
+            exit 0
+            ;;
+        *)
+            # Invalid input
+            echo -e "\nInvalid choice, please select a number between 1 and 15."
+            ;;
+    esac
+done
