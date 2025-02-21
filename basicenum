@@ -1,0 +1,61 @@
+#!/bin/bash
+
+echo "Collecting Linux Enumeration Data..."
+
+# Check user ID
+echo -e "\nUser ID:"
+id
+
+# Check hostname
+echo -e "\nHostname:"
+hostname
+
+# List files with detailed permissions
+echo -e "\nListing files with detailed permissions (ls -l):"
+ls -l
+
+# List sudo permissions
+echo -e "\nSudo permissions:"
+sudo -l
+
+# Read /etc/passwd file
+echo -e "\nContents of /etc/passwd:"
+cat /etc/passwd
+
+# Read /etc/shadow file
+echo -e "\nContents of /etc/shadow:"
+cat /etc/shadow
+
+# Read /etc/issue file
+echo -e "\nContents of /etc/issue:"
+cat /etc/issue
+
+# Read /etc/os-release file
+echo -e "\nContents of /etc/os-release:"
+cat /etc/os-release
+
+# Output system information (uname -a)
+echo -e "\nSystem Information (uname -a):"
+uname -a
+
+# Check routing information (route or routel)
+echo -e "\nRouting Information:"
+route -n || routel -n
+
+# List cron jobs
+echo -e "\nListing cron jobs in /etc/cron* directories:"
+ls -lah /etc/cron*
+
+# List user crontab
+echo -e "\nUser Crontab:"
+crontab -l
+
+# Find writable directories
+echo -e "\nFinding writable directories:"
+find / -writable -type d 2>/dev/null
+
+# Find SUID files
+echo -e "\nFinding SUID files:"
+find / -perm -u=s -type f 2>/dev/null
+
+echo -e "\nEnumeration Complete!"
