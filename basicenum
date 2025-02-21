@@ -1,9 +1,19 @@
 #!/bin/bash
 
-echo "Welcome to the Linux Enumeration Tool!"
+# Define color codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+WHITE='\033[0;97m'
+NC='\033[0m'  # No Color
+
+echo -e "${GREEN}Welcome to the Linux Enumeration Tool!${NC}"
+
 while true; do
     # Menu options
-    echo "Select the task to run:"
+    echo -e "${CYAN}Select the task to run:${NC}"
     echo "1) User ID"
     echo "2) Hostname"
     echo "3) List files with detailed permissions"
@@ -26,82 +36,82 @@ while true; do
     case $choice in
         1)
             # Check user ID
-            echo -e "\nUser ID:"
+            echo -e "${YELLOW}\nUser ID:${NC}"
             id
             ;;
         2)
             # Check hostname
-            echo -e "\nHostname:"
+            echo -e "${YELLOW}\nHostname:${NC}"
             hostname
             ;;
         3)
             # List files with detailed permissions
-            echo -e "\nListing files with detailed permissions (ls -l):"
+            echo -e "${YELLOW}\nListing files with detailed permissions (ls -l):${NC}"
             ls -l
             ;;
         4)
             # List sudo permissions
-            echo -e "\nSudo permissions:"
+            echo -e "${YELLOW}\nSudo permissions:${NC}"
             sudo -l
             ;;
         5)
             # Read /etc/passwd file
-            echo -e "\nContents of /etc/passwd:"
+            echo -e "${YELLOW}\nContents of /etc/passwd:${NC}"
             cat /etc/passwd
             ;;
         6)
             # Read /etc/shadow file
-            echo -e "\nContents of /etc/shadow:"
+            echo -e "${YELLOW}\nContents of /etc/shadow:${NC}"
             cat /etc/shadow
             ;;
         7)
             # Read /etc/issue file
-            echo -e "\nContents of /etc/issue:"
+            echo -e "${YELLOW}\nContents of /etc/issue:${NC}"
             cat /etc/issue
             ;;
         8)
             # Read /etc/os-release file
-            echo -e "\nContents of /etc/os-release:"
+            echo -e "${YELLOW}\nContents of /etc/os-release:${NC}"
             cat /etc/os-release
             ;;
         9)
             # Output system information (uname -a)
-            echo -e "\nSystem Information (uname -a):"
+            echo -e "${YELLOW}\nSystem Information (uname -a):${NC}"
             uname -a
             ;;
         10)
             # Check routing information (route or routel)
-            echo -e "\nRouting Information:"
+            echo -e "${YELLOW}\nRouting Information:${NC}"
             route -n || routel -n
             ;;
         11)
             # List cron jobs
-            echo -e "\nListing cron jobs in /etc/cron* directories:"
+            echo -e "${YELLOW}\nListing cron jobs in /etc/cron* directories:${NC}"
             ls -lah /etc/cron*
             ;;
         12)
             # List user crontab
-            echo -e "\nUser Crontab:"
+            echo -e "${YELLOW}\nUser Crontab:${NC}"
             crontab -l
             ;;
         13)
             # Find writable directories
-            echo -e "\nFinding writable directories:"
+            echo -e "${YELLOW}\nFinding writable directories:${NC}"
             find / -writable -type d 2>/dev/null
             ;;
         14)
             # Find SUID files
-            echo -e "\nFinding SUID files:"
+            echo -e "${YELLOW}\nFinding SUID files:${NC}"
             find / -perm -u=s -type f 2>/dev/null
             ;;
         15)
             # Exit the script
-            echo -e "\nExiting script."
+            echo -e "${RED}\nExiting script.${NC}"
             exit 0
             ;;
         *)
             # Invalid input
-            echo -e "\nInvalid choice, please select a number between 1 and 15."
+            echo -e "${RED}\nInvalid choice, please select a number between 1 and 15.${NC}"
             ;;
     esac
 done
