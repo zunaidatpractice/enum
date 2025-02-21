@@ -18,10 +18,7 @@ echo -e "${YELLOW}                       Basic Recon Tool - by Ichthyocentaurs${
 # Small pause before continuing
 sleep 2
 
-# Continue with the rest of the script
-echo -e "${GREEN}Welcome to the Basic Recon tool!${NC}"
-
-echo -e "${GREEN}Welcome to the Linux Enumeration Tool!${NC}"
+echo -e "${GREEN}Welcome to the Basic Linux Enumeration Tool!${NC}"
 
 while true; do
     # Menu options
