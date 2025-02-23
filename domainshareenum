@@ -1,0 +1,41 @@
+# Ensure PowerView is imported before running this script
+
+# Function to find and enumerate domain shares
+function Enumerate-DomainShares {
+    Write-Host "Enumerating domain shares..." -ForegroundColor Green
+
+    try {
+        # Find domain shares
+        $shares = Find-DomainShare -CheckShareAccess -ErrorAction Stop
+    } catch {
+        Write-Host "[!] Error running Find-DomainShare: $_" -ForegroundColor Red
+        return
+    }
+
+    if (-not $shares -or $shares.Count -eq 0) {
+        Write-Host "[!] No domain shares found or access denied." -ForegroundColor Yellow
+        return
+    }
+
+    foreach ($share in $shares) {
+        $server = $share.'ComputerName'
+        $sharename = $share.'Name'
+        $path = "\\$server\$sharename"
+
+        Write-Host "`n[+] Share: $path" -ForegroundColor Cyan
+
+        # Try to list contents using ls (Get-ChildItem)
+        try {
+            ls $path -ErrorAction Stop | ForEach-Object {
+                Write-Host "    $_"
+            }
+        } catch {
+            Write-Host "    [!] Access Denied or Cannot List: $($_.Exception.Message)" -ForegroundColor Red
+        }
+    }
+
+    Write-Host "`n[+] Enumeration complete." -ForegroundColor Green
+}
+
+# Run the function
+Enumerate-DomainShares
