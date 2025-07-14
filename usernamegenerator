@@ -1,0 +1,51 @@
+#usage
+#python3 username_generator.py -i names.txt -o usernames.txt
+
+import argparse
+
+def generate_usernames(first_name, last_name):
+    first = first_name.lower()
+    last = last_name.lower()
+
+    patterns = [
+        f"{first}",
+        f"{last}",
+        f"{first}{last}",
+        f"{first}.{last}",
+        f"{first}_{last}",
+        f"{first[0]}{last}",
+        f"{first}{last[0]}",
+        f"{first[0]}.{last}",
+        f"{last}{first[0]}",
+        f"{first[0]}{last[0]}",
+        f"{last}.{first}",
+        f"{last}_{first}"
+    ]
+    return patterns
+
+def main(input_file, output_file):
+    usernames = set()
+
+    with open(input_file, 'r') as f:
+        for line in f:
+            parts = line.strip().split()
+            if len(parts) >= 2:
+                first, last = parts[0], parts[1]
+                usernames.update(generate_usernames(first, last))
+            elif len(parts) == 1:
+                usernames.add(parts[0].lower())
+
+    with open(output_file, 'w') as f:
+        for user in sorted(usernames):
+            f.write(user + "\n")
+
+    print(f"[+] Generated {len(usernames)} usernames in {output_file}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Username Generator for OSCP Prep")
+    parser.add_argument("-i", "--input", required=True, help="Input file with names")
+    parser.add_argument("-o", "--output", required=True, help="Output file for usernames")
+    args = parser.parse_args()
+
+    main(args.input, args.output)
+
