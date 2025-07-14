@@ -42,7 +42,7 @@ def main(input_file, output_file):
     print(f"[+] Generated {len(usernames)} usernames in {output_file}")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Username Generator for OSCP Prep")
+    parser = argparse.ArgumentParser(description="Username Generator")
     parser.add_argument("-i", "--input", required=True, help="Input file with names")
     parser.add_argument("-o", "--output", required=True, help="Output file for usernames")
     args = parser.parse_args()
